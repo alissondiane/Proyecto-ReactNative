@@ -6,7 +6,7 @@ export default class App extends Component<Props> {
     return (
         <View style={{flex:1}}>
           <StatusBar
-              backgroundColor="#ea5252"
+              backgroundColor="purple"
               barStyle="light-content"
           />
           <Navigator/>

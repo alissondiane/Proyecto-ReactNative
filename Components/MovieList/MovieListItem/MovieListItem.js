@@ -3,10 +3,9 @@ import {View, StyleSheet, Text, Image, Slider} from "react-native"
 import TouchableWrapper from '../../TouchableWrapper/TouchableWrapper'
 
 type Props = {
-    title: string,
-    subTitle: string,
-    progress: number,
-    img?: string,
+    original_title: string,
+    poster_path?: string,
+    genres:[],
     onPress?: Function
 }
 const movieListItem = (props: Props) => (
@@ -15,13 +14,21 @@ const movieListItem = (props: Props) => (
             <View style={styles.left}>
                 <Image
                     style={styles.img}
-                    source={{ uri: props.img}}
+                    source={{ uri: props.poster_path}}
                 />
             </View>
             <View style={styles.right}>
-                <Text style={styles.title} >{props.title}</Text>
-                <Text style={styles.subTitle}>{props.subTitle}</Text>
-                <Slider maximumValue={100}  value={props.progress} disabled />
+
+
+                <Text style={styles.title} >{props.original_title}</Text>
+                <View style={styles.tags}>
+                {
+                    props.genres.map((genre) => {
+                        return <Text style={styles.genre} key={genre.toString()}>{genre}</Text>
+
+                    })
+                }
+                </View>
             </View>
         </View>
     </TouchableWrapper>
@@ -40,7 +47,8 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 18,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color: 'white'
     },
     subTitle: {
         color: 'grey'
@@ -50,6 +58,18 @@ const styles = StyleSheet.create({
     },
     right: {
         width: '70%'
+    },
+    genre:{
+        color:'purple',
+        fontSize:15,
+        backgroundColor:'white',
+        borderRadius:12,
+        padding:2,
+        margin:1
+    },
+    tags:{
+        flexDirection: 'row'
+
     }
 
 

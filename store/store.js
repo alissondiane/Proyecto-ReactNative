@@ -1,9 +1,10 @@
-import {combineReducers, createStore, applyMiddleware} from 'redux'
-import thunk from 'redux-thunk'
-import {moviesReducer} from "./reducers/movie.reducer";
+import {combineReducers, createStore} from 'redux';
+import {movieReducer} from "./reducers/movie.reducer";
+import { reducer as form } from "redux-form"
 
 const rootReducer = combineReducers({
-   movies: moviesReducer
+   movie: movieReducer,
+   form
 });
 
-export const generateStore = () => createStore(rootReducer, applyMiddleware(thunk));
+export const generateStore = () => createStore(rootReducer);

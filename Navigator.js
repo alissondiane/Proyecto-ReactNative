@@ -1,10 +1,22 @@
+import React from 'react'
 import {
     createAppContainer,
     createBottomTabNavigator,
-    createStackNavigator
+    createStackNavigator,
+    createSwitchNavigator
 } from 'react-navigation';
-import MyMovies from "./screens/MyMovies/MyMovies";
-import MyMoviesDetail from "./screens/MyMovies/MyMovieDetail/MyMovieDetail";
+import MyMovies from "./screen/MyMovies/MyMovies";
+import Search from "./screen/Search/Search";
+import Account from "./screen/Account/Account";
+import MyMovieDetail from "./screen/MyMovies/MyMovieDetail/MyMovieDetail";
+
+
+const defaultNavigationOptions = {
+    headerStyle: {
+        backgroundColor: 'purple'
+    },
+    headerTintColor: '#fff'
+};
 
 const MyMovieStack = createStackNavigator(
     {
@@ -16,19 +28,31 @@ const MyMovieStack = createStackNavigator(
         },
         MyMovieDetail
     },
-    {
-        defaultNavigationOptions: {
-            headerStyle: {
-                backgroundColor: '#ea5252'
-            },
-            headerTintColor: '#fff'
-        }
-    }
+    {defaultNavigationOptions}
 );
 
-const Navigator = createBottomTabNavigator(
+const SearchStack = createStackNavigator(
+    {Search},
+    {defaultNavigationOptions}
+);
+
+const AccountStack = createStackNavigator(
+    {Account},
+    {defaultNavigationOptions}
+);
+
+
+/*const MenuTab = createBottomTabNavigator(
     {
-        MyMovies: MyMovieStack
+        Search: {
+            screen: SearchStack
+        },
+        MyMovies: {
+            screen: MyMovieStack
+        },
+        Account: {
+            screen: AccountStack
+        },
     },
     {
         initialRouteName: 'MyMovies',
@@ -48,5 +72,9 @@ const Navigator = createBottomTabNavigator(
         }
     }
 );
+*/
+const Navigator = createSwitchNavigator({
+    Menu: MyMovieStack
+});
 
 export default createAppContainer(Navigator);
